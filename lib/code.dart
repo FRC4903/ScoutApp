@@ -17,10 +17,15 @@ class QRState extends State<QRCode> {
 
   @override
   Widget build(BuildContext context) {
-    return QrImage(
+    return Material(
+      child: Container(
+      padding: EdgeInsets.all(20),
+      child: QrImage(
       data: '${widget.data}',
       version: QrVersions.auto,
-      size: 500,
-      );
+      size: 450,
+      )
+      )
+    );
   }
 }
