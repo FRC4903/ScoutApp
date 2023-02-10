@@ -4,9 +4,14 @@ import 'endgame.dart';
 
 import 'code.dart';
 
-class Teleop extends StatelessWidget { //main page
+class Teleop extends StatefulWidget { //main page
   const Teleop({super.key});
 
+  @override
+  State<Teleop> createState () => TeleopState();
+}
+
+class TeleopState extends State<Teleop> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -21,7 +26,6 @@ class Teleop extends StatelessWidget { //main page
             ]
           ),
           ),
-            QRCode(data: 'peepeepoopoo')
         ]
       )
     );

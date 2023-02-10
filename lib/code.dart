@@ -20,7 +20,7 @@ class QRState extends State<QRCode> {
     return QrImage(
       data: '${widget.data}',
       version: QrVersions.auto,
-      size: 300,
+      size: 500,
       );
   }
 }
