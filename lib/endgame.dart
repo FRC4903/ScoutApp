@@ -155,8 +155,12 @@ class _EndgameState extends State<Endgame> {
           ),
         ),
       ),
+<<<<<<< Updated upstream
     ),
     PostMatch(past: '${widget.past},$attempts,$success')
+=======
+      PostMatch(past: '${widget.past},${seconds + 60* minutes},$attempts,$success')
+>>>>>>> Stashed changes
     ]));
   }
 }
