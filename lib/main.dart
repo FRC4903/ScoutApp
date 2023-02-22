@@ -11,7 +11,8 @@ void main() {
   );
 }
 
-class MyScaffold extends StatelessWidget { //container class
+class MyScaffold extends StatelessWidget {
+  //container class
   const MyScaffold({super.key});
 
   @override
@@ -19,16 +20,15 @@ class MyScaffold extends StatelessWidget { //container class
     // Material is a conceptual piece
     // of paper on which the UI appears.
     return Material(
-      child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        body: Column( children: [
-          SizedBox(height: 30),
-          Expanded(
-            child: Center(
-              child: PreMatch(),
-            ),
-          ),
-      ])
-    ));
+        child: Scaffold(
+            resizeToAvoidBottomInset: true,
+            body: Column(children: [
+              SizedBox(height: 30),
+              Expanded(
+                child: Center(
+                  child: PreMatch(),
+                ),
+              ),
+            ])));
   }
 }
