@@ -183,7 +183,7 @@ class _EndgameState extends State<Endgame> {
           ),
         ),
       ),
-      PostMatch(past: '${widget.past},$attempts,$success')
+      PostMatch(past: '${widget.past},${seconds + minutes * 60},$attempts,$success')
     ]));
   }
 }
