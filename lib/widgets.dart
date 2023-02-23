@@ -162,11 +162,10 @@ class IncrementState extends State<Increment> {
             child: Text(
               "${widget.title}",
               style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.none
-              ),
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.none),
             ),
           ),
           Padding(
@@ -182,7 +181,10 @@ class IncrementState extends State<Increment> {
                       )),
                   Text(
                     '$value',
-                    style: TextStyle(fontSize: 40,color: Colors.black,decoration: TextDecoration.none),
+                    style: TextStyle(
+                        fontSize: 40,
+                        color: Colors.black,
+                        decoration: TextDecoration.none),
                   ),
                   IconButton(
                       onPressed: increment,
@@ -203,9 +205,11 @@ class IncrementState extends State<Increment> {
   }
 
   void decrement() {
-    setState(() {
-      value--;
-    });
+    if (value > 0) {
+      setState(() {
+        value--;
+      });
+    }
     widget.callback(value);
   }
 }
