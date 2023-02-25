@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'widgets.dart';
-import 'endgame.dart';
 
-class Teleop extends StatefulWidget { //teleop page
+class Teleop extends StatefulWidget {
+  //teleop page
   const Teleop({super.key, required this.past});
 
   final String past;
 
   @override
-  State<Teleop> createState () => TeleopState();
+  State<Teleop> createState() => TeleopState();
 }
 
-class TeleopState extends State<Teleop> { //all the objects added to the main page here
-
+class TeleopState extends State<Teleop> {
+  //all the objects added to the main page here
   int cupper = 0;
   int cmid = 0;
   int clower = 0;
@@ -25,42 +25,58 @@ class TeleopState extends State<Teleop> { //all the objects added to the main pa
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( 
-      home: PageView( 
-        children: [
-          Expanded(
-                child:  ListView( 
-                  children: [
-                    Center(
-                      child: Row(
-                        children: [
-                          Column(
-                            children: [
-                            Icon(color: Colors.orange, Icons.change_history_rounded, size:50),
-                            Increment(title: 'upper', callback: (value) => setState(() => cupper = value)), //increment widget (add, subtract, and show value), setstate sets the variable to the output from the widget
-                            Increment(title: 'middle', callback: (value) => setState(() => cmid = value)),
-                            Increment(title: 'lower', callback: (value) => setState(() => clower = value)),
-                          ]),
-                          Column(
-                            children: [
-                            Icon(color: Colors.purple, Icons.square_rounded, size:50),
-                            Increment(title: 'upper', callback: (value) => setState(() => qupper = value)), //increment widget (add, subtract, and show value), setstate sets the variable to the output from the widget
-                            Increment(title: 'middle', callback: (value) => setState(() => qmid = value)),
-                            Increment(title: 'lower', callback: (value) => setState(() => qlower = value)),
-                          ]),
-                          Column(
-                            children: [
-                            Icon(color: Colors.black, Icons.clear_all_rounded, size:50),
-                            Increment(title: 'links', callback: (value) => setState(() => links = value)), //increment widget (add, subtract, and show value), setstate sets the variable to the output from the widget
-                            Increment(title: 'picked up', callback: (value) => setState(() => pickup = value)),
-                            Increment(title: 'defense', callback: (value) => setState(() => defense = value)),
-                          ])
-                        ])
-                    )
-              ])
-            ),
-        Endgame(past: '${widget.past},$cupper,$cmid,$clower,$qupper,$qmid,$qlower,$links,$pickup,$defense'),
-      ])
+    return Scaffold(
+      body: Container(
+        color: Colors.black,
+        child: ListView(children: [
+          Center(
+            child: Row(children: [
+              Column(children: [
+                Icon(
+                    color: Colors.orange,
+                    Icons.change_history_rounded,
+                    size: 50),
+                Increment(
+                    title: 'upper',
+                    callback: (value) => setState(() => cupper =
+                        value)), //increment widget (add, subtract, and show value), setstate sets the variable to the output from the widget
+                Increment(
+                    title: 'middle',
+                    callback: (value) => setState(() => cmid = value)),
+                Increment(
+                    title: 'lower',
+                    callback: (value) => setState(() => clower = value)),
+              ]),
+              Column(children: [
+                Icon(color: Colors.purple, Icons.square_rounded, size: 50),
+                Increment(
+                    title: 'upper',
+                    callback: (value) => setState(() => qupper =
+                        value)), //increment widget (add, subtract, and show value), setstate sets the variable to the output from the widget
+                Increment(
+                    title: 'middle',
+                    callback: (value) => setState(() => qmid = value)),
+                Increment(
+                    title: 'lower',
+                    callback: (value) => setState(() => qlower = value)),
+              ]),
+              Column(children: [
+                Icon(color: Colors.black, Icons.clear_all_rounded, size: 50),
+                Increment(
+                    title: 'links',
+                    callback: (value) => setState(() => links =
+                        value)), //increment widget (add, subtract, and show value), setstate sets the variable to the output from the widget
+                Increment(
+                    title: 'picked up',
+                    callback: (value) => setState(() => pickup = value)),
+                Increment(
+                    title: 'defense',
+                    callback: (value) => setState(() => defense = value)),
+              ]),
+            ]),
+          )
+        ]),
+      ),
     );
   }
 }

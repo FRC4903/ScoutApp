@@ -23,11 +23,10 @@ class PostMatchState extends State<PostMatch> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(children: [
-      Expanded(
-          child: Center(
-              child: ListView(children: [
-        SizedBox(
+    return Stack(fit: StackFit.expand, children: [
+      Center(
+        child: ListView(children: [
+          SizedBox(
             height: 1200,
             child: Column(children: [
               TextInput(
@@ -64,9 +63,10 @@ class PostMatchState extends State<PostMatch> {
               ),
               Increment(
                   title: 'RP', callback: (value) => setState(() => RP = value)),
-            ]))
-      ]))),
-      QRCode(data: '${widget.past},$auto,$teleop,$endgame,$win,$RP')
+            ]),
+          )
+        ]),
+      )
     ]);
   }
 }

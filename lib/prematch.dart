@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'widgets.dart';
-import 'auto.dart';
 
-class PreMatch extends StatefulWidget { //teleop page
+class PreMatch extends StatefulWidget {
+  //teleop page
   const PreMatch({super.key});
 
   @override
-  State<PreMatch> createState () => PreMatchState();
+  State<PreMatch> createState() => PreMatchState();
 }
 
-class PreMatchState extends State<PreMatch> { //all the objects added to the main page here
-
+class PreMatchState extends State<PreMatch> {
   String team = '';
   String match = '';
   String scouter = '';
@@ -18,14 +17,37 @@ class PreMatchState extends State<PreMatch> { //all the objects added to the mai
   @override
   Widget build(BuildContext context) {
     return PageView(
-        children: [
-        Expanded( child: Center( child: ListView(
-          children: [SizedBox(height: 1200, child: Column( children: [
-            TextInput(title: 'team number', callback: (value) => setState(() => team = value)),
-            TextInput(title: 'match number', callback: (value) => setState(() => match = value)),
-            TextInput(title: 'scouter', callback: (value) => setState(() => scouter = value)),
-        ]))]))),
-        Auto(past: '$team,$match,$scouter')
-    ]);
+      children: [
+        Scaffold(
+          body: Column(
+            children: [
+              const SizedBox(height: 30),
+              Container(
+                child: const Text(
+                  'Pre-Match',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
+              TextInput(
+                  title: "Team Number",
+                  callback: (value) => setState(() => team = value)),
+              const SizedBox(height: 30),
+              TextInput(
+                  title: "Match Number",
+                  callback: (value) => setState(() => match = value)),
+              const SizedBox(height: 30),
+              TextInput(
+                  title: "Scouter",
+                  callback: (value) => setState(() => scouter = value)),
+              const SizedBox(height: 30),
+            ],
+          ),
+        )
+      ],
+    );
   }
 }
