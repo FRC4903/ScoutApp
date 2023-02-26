@@ -3,16 +3,17 @@ import 'widgets.dart';
 import 'teleop.dart';
 
 class Auto extends StatefulWidget {
-  const Auto({super.key, required this.past});
+  const Auto({super.key, required this.inputs, required this.callback});
 
-  final String past;
+  final inputs;
+  final callback;
 
   @override
   State<Auto> createState() => Funkyauto();
 }
 
 class Funkyauto extends State<Auto> {
-  int extraCones = 0;
+  /*int extraCones = 0;
   int extraCubes = 0;
   bool moved = false;
   bool balanceAttempt = false;
@@ -21,7 +22,7 @@ class Funkyauto extends State<Auto> {
   bool preScore = false;
   bool autoDocked = false;
   bool autoEngaged = false;
-
+*/
   //ignore these, use startpos()
   List<bool> isRectangleTapped = List.filled(3, false);
   List<bool> isRectangleTapped2 = List.filled(3, false);
@@ -46,6 +47,7 @@ class Funkyauto extends State<Auto> {
     isRectangleTapped[2] = false;
     setState(() {
       list[index] = true;
+      widget.inputs['startPos'] = index+1;
     });
   }
 
@@ -57,14 +59,19 @@ class Funkyauto extends State<Auto> {
       isRectangleTapped[2] = false;
       setState(() {
         list[index] = !list[index];
+        widget.inputs['startPos'] = 'none';
       });
     }
   }
 
+  void send(String tag, value) {
+    setState(() => widget.inputs[tag] = value);
+    widget.callback(widget.inputs);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return PageView(children: [
-      Scaffold(
+    return Scaffold(
         body: SingleChildScrollView(
           child: Center(
             child: Row(
@@ -163,11 +170,9 @@ class Funkyauto extends State<Auto> {
                         Transform.scale(
                           scale: 1.5,
                           child: Checkbox(
-                            value: moved,
+                            value: widget.inputs['moved'],
                             onChanged: (bool? value) {
-                              setState(() {
-                                moved = value ?? false;
-                              });
+                              send('moved' ,value ?? false);
                             },
                           ),
                         ),
@@ -199,11 +204,9 @@ class Funkyauto extends State<Auto> {
                                 Transform.scale(
                                   scale: 1.5,
                                   child: Checkbox(
-                                    value: balanceAttempt,
+                                    value: widget.inputs['balanceAttempt'],
                                     onChanged: (bool? value) {
-                                      setState(() {
-                                        balanceAttempt = value ?? false;
-                                      });
+                                      send('balanceAttempt', value ?? false);
                                     },
                                   ),
                                 ),
@@ -229,11 +232,9 @@ class Funkyauto extends State<Auto> {
                                 Transform.scale(
                                   scale: 1.5,
                                   child: Checkbox(
-                                    value: autoDocked,
+                                    value: widget.inputs['autoDocked'],
                                     onChanged: (bool? value) {
-                                      setState(() {
-                                        autoDocked = value ?? false;
-                                      });
+                                      send('autoDocked', value ?? false);
                                     },
                                   ),
                                 ),
@@ -252,11 +253,9 @@ class Funkyauto extends State<Auto> {
                                 Transform.scale(
                                   scale: 1.5,
                                   child: Checkbox(
-                                    value: autoEngaged,
+                                    value: widget.inputs['autoEngaged'],
                                     onChanged: (bool? value) {
-                                      setState(() {
-                                        autoEngaged = value ?? false;
-                                      });
+                                      send('autoEngaged', value ?? false);
                                     },
                                   ),
                                 ),
@@ -292,11 +291,9 @@ class Funkyauto extends State<Auto> {
                                 Transform.scale(
                                   scale: 1.5,
                                   child: Checkbox(
-                                    value: preCone,
+                                    value: widget.inputs['preCone'],
                                     onChanged: (bool? value) {
-                                      setState(() {
-                                        preCone = value ?? false;
-                                      });
+                                      send('preCone', value ?? false);
                                     },
                                   ),
                                 ),
@@ -315,11 +312,9 @@ class Funkyauto extends State<Auto> {
                                 Transform.scale(
                                   scale: 1.5,
                                   child: Checkbox(
-                                    value: preCube,
+                                    value: widget.inputs['preCube'],
                                     onChanged: (bool? value) {
-                                      setState(() {
-                                        preCube = value ?? false;
-                                      });
+                                      send('preCube', value ?? false);
                                     },
                                   ),
                                 ),
@@ -338,11 +333,9 @@ class Funkyauto extends State<Auto> {
                                 Transform.scale(
                                   scale: 1.5,
                                   child: Checkbox(
-                                    value: preScore,
+                                    value: widget.inputs['preScore'],
                                     onChanged: (bool? value) {
-                                      setState(() {
-                                        preScore = value ?? false;
-                                      });
+                                      send('preScore', value ?? false);
                                     },
                                   ),
                                 ),
@@ -358,16 +351,16 @@ class Funkyauto extends State<Auto> {
                     Row(
                       children: [
                         Increment(
-                            title: 'Extra Cones',
+                            title: 'Extra Cones', value: widget.inputs['extraCones'],
                             callback: (value) =>
-                                setState(() => extraCones = value)),
+                                send('extraCones', value)),
                         SizedBox(
                           width: 30,
                         ),
                         Increment(
-                            title: 'Extra Cubes',
+                            title: 'Extra Cubes', value: widget.inputs['extraCubes'],
                             callback: (value) =>
-                                setState(() => extraCubes = value)),
+                                send('extraCubes', value)),
                       ],
                     )
                   ],
@@ -376,10 +369,6 @@ class Funkyauto extends State<Auto> {
             ),
           ),
         ),
-      ),
-      Teleop(
-          past:
-              '${widget.past},$extraCones,$extraCubes,$moved,$balanceAttempt,$preCone,$preCube,$preScore,$autoDocked,$autoEngaged')
-    ]);
+      );
   }
 }

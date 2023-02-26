@@ -4,9 +4,10 @@ import 'code.dart';
 
 class PostMatch extends StatefulWidget {
   //teleop page
-  const PostMatch({super.key, required this.past});
+  const PostMatch({super.key, required this.inputs, required this.callback});
 
-  final String past;
+  final inputs;
+  final callback;
 
   @override
   State<PostMatch> createState() => PostMatchState();
@@ -21,24 +22,28 @@ class PostMatchState extends State<PostMatch> {
   bool win = false;
   int RP = 0;
 
+  void send(String tag, value) {
+    setState(() => widget.inputs[tag] = value);
+    widget.callback(widget.inputs);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return PageView(children: [
-      Expanded(
+    return Expanded(
           child: Center(
               child: ListView(children: [
         SizedBox(
             height: 1200,
             child: Column(children: [
               TextInput(
-                  title: 'auto comments',
-                  callback: (value) => setState(() => auto = value)),
+                  title: 'auto comments', initial: widget.inputs['auto'], 
+                  callback: (value) => send('auto', value)),
               TextInput(
-                  title: 'teleop comments',
-                  callback: (value) => setState(() => teleop = value)),
+                  title: 'teleop comments', initial: widget.inputs['teleop'], 
+                  callback: (value) => send('teleop', value)),
               TextInput(
-                  title: 'endgame comments',
-                  callback: (value) => setState(() => endgame = value)),
+                  title: 'endgame comments', initial: widget.inputs['endgame'], 
+                  callback: (value) => send('endgame', value)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -52,21 +57,17 @@ class PostMatchState extends State<PostMatch> {
                   Transform.scale(
                     scale: 1.5,
                     child: Checkbox(
-                      value: win,
+                      value: widget.inputs['win'],
                       onChanged: (bool? value) {
-                        setState(() {
-                          win = value ?? false;
-                        });
+                        send('win', value ?? false);
                       },
                     ),
                   ),
                 ],
               ),
               Increment(
-                  title: 'RP', callback: (value) => setState(() => RP = value)),
+                  title: 'RP', value: widget.inputs['RP'], callback: (value) => send('RP', value)),
             ]))
-      ]))),
-      QRCode(data: '${widget.past},$auto,$teleop,$endgame,$win,$RP')
-    ]);
+      ])));
   }
 }

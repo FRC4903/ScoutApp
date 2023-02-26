@@ -7,9 +7,11 @@ import 'dart:ffi';
 //import 'widgets2.dart';
 
 class Endgame extends StatefulWidget {
-  const Endgame({super.key, required this.past});
+  const Endgame({super.key, required this.inputs, required this.callback, required this.initialtime});
 
-  final String past;
+  final inputs;
+  final callback;
+  final initialtime;
 
   @override
   State<Endgame> createState() => _EndgameState();
@@ -24,6 +26,22 @@ class _EndgameState extends State<Endgame> {
   bool endDocked = false;
   bool endEngaged = false;
 
+  int initialmins = 0;
+  int initialsecs = 0;
+
+  @override
+  void initState() {
+    initialsecs = widget.initialtime%60;
+    initialmins = ((widget.initialtime-initialsecs)/60).round();
+    digitsSec = (initialsecs >= 10) ? "$initialsecs" : "0$initialsecs";
+    digitsMin = (initialmins >= 10) ? "$initialmins" : "0$initialmins";
+  }
+
+  void send(String tag, value) {
+    setState(() => widget.inputs[tag] = value);
+    widget.callback(widget.inputs);
+  }
+
   void start() {
     started = true;
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -37,9 +55,12 @@ class _EndgameState extends State<Endgame> {
 
       setState(() {
         seconds = localSeconds;
+        int tseconds = seconds + initialsecs;
         minutes = localMinutes;
-        digitsSec = (seconds >= 10) ? "$seconds" : "0$seconds";
-        digitsMin = (minutes >= 10) ? "$minutes" : "0$minutes";
+        int tminutes = minutes + initialmins;
+        digitsSec = (tseconds >= 10) ? "$tseconds" : "0$tseconds";
+        digitsMin = (tminutes >= 10) ? "$tminutes" : "0$tminutes";
+        send('time', seconds + minutes*60);
       });
     });
   }
@@ -54,8 +75,7 @@ class _EndgameState extends State<Endgame> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: PageView(children: [
-      Scaffold(
+        home: Scaffold(
         backgroundColor: Color.fromARGB(255, 0, 12, 101),
         body: SafeArea(
           child: Padding(
@@ -142,9 +162,9 @@ class _EndgameState extends State<Endgame> {
                                   width: 40,
                                 ),
                                 Increment(
-                                  title: 'Attempts',
+                                  title: 'Attempts', value: widget.inputs['attempts'],
                                   callback: (value) =>
-                                      setState(() => attempts = value),
+                                      send('attempts', value),
                                 ),
                                 const SizedBox(
                                   width: 40,
@@ -170,11 +190,9 @@ class _EndgameState extends State<Endgame> {
                                                 (states) =>
                                                     const Color.fromARGB(
                                                         255, 0, 0, 0)),
-                                        value: endDocked,
+                                        value: widget.inputs['endDocked'],
                                         onChanged: (bool? value) {
-                                          setState(() {
-                                            endDocked = value!;
-                                          });
+                                          send('endDocked',value!);
                                         },
                                       ),
                                     )
@@ -204,11 +222,9 @@ class _EndgameState extends State<Endgame> {
                                                 (states) =>
                                                     const Color.fromARGB(
                                                         255, 0, 0, 0)),
-                                        value: endEngaged,
+                                        value: widget.inputs['endEngaged'],
                                         onChanged: (bool? value) {
-                                          setState(() {
-                                            endEngaged = value!;
-                                          });
+                                          send('endEngaged', value!);
                                         },
                                       ),
                                     )
@@ -229,10 +245,6 @@ class _EndgameState extends State<Endgame> {
             ),
           ),
         ),
-      ),
-      PostMatch(
-          past:
-              '${widget.past},${seconds + minutes * 60},$attempts,$endDocked,$endEngaged')
-    ]));
+      ));
   }
 }

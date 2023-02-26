@@ -3,9 +3,10 @@ import 'widgets.dart';
 import 'endgame.dart';
 
 class Teleop extends StatefulWidget { //teleop page
-  const Teleop({super.key, required this.past});
+  const Teleop({super.key, required this.inputs, required this.callback});
 
-  final String past;
+  final inputs;
+  final callback;
 
   @override
   State<Teleop> createState () => TeleopState();
@@ -23,12 +24,15 @@ class TeleopState extends State<Teleop> { //all the objects added to the main pa
   int pickup = 0;
   int defense = 0;
 
+  void send(String tag, value) {
+    setState(() => widget.inputs[tag] = value);
+    widget.callback(widget.inputs);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp( 
-      home: PageView( 
-        children: [
-          Expanded(
+      home: Expanded(
                 child:  ListView( 
                   children: [
                     Center(
@@ -37,30 +41,28 @@ class TeleopState extends State<Teleop> { //all the objects added to the main pa
                           Column(
                             children: [
                             Icon(color: Colors.orange, Icons.change_history_rounded, size:50),
-                            Increment(title: 'upper', callback: (value) => setState(() => cupper = value)), //increment widget (add, subtract, and show value), setstate sets the variable to the output from the widget
-                            Increment(title: 'middle', callback: (value) => setState(() => cmid = value)),
-                            Increment(title: 'lower', callback: (value) => setState(() => clower = value)),
+                            Increment(title: 'upper', value: widget.inputs['cupper'], callback: (value) => send('cupper', value)), //increment widget (add, subtract, and show value), setstate sets the variable to the output from the widget
+                            Increment(title: 'middle', value: widget.inputs['cmid'], callback: (value) => send('cmid', value)),
+                            Increment(title: 'lower', value: widget.inputs['clower'], callback: (value) => send('clower', value)),
                           ]),
                           Column(
                             children: [
                             Icon(color: Colors.purple, Icons.square_rounded, size:50),
-                            Increment(title: 'upper', callback: (value) => setState(() => qupper = value)), //increment widget (add, subtract, and show value), setstate sets the variable to the output from the widget
-                            Increment(title: 'middle', callback: (value) => setState(() => qmid = value)),
-                            Increment(title: 'lower', callback: (value) => setState(() => qlower = value)),
+                            Increment(title: 'upper', value: widget.inputs['qupper'], callback: (value) => send('qupper', value)), //increment widget (add, subtract, and show value), setstate sets the variable to the output from the widget
+                            Increment(title: 'middle', value: widget.inputs['qmid'], callback: (value) => send('qmid', value)),
+                            Increment(title: 'lower', value: widget.inputs['qlower'], callback: (value) => send('qlower', value)),
                           ]),
                           Column(
                             children: [
                             Icon(color: Colors.black, Icons.clear_all_rounded, size:50),
-                            Increment(title: 'links', callback: (value) => setState(() => links = value)), //increment widget (add, subtract, and show value), setstate sets the variable to the output from the widget
-                            Increment(title: 'picked up', callback: (value) => setState(() => pickup = value)),
-                            Increment(title: 'defense', callback: (value) => setState(() => defense = value)),
+                            Increment(title: 'links', value: widget.inputs['links'], callback: (value) => send('links', value)), //increment widget (add, subtract, and show value), setstate sets the variable to the output from the widget
+                            Increment(title: 'picked up', value: widget.inputs['pickup'], callback: (value) => send('pickup', value)),
+                            Increment(title: 'defense', value: widget.inputs['defense'], callback: (value) => send('defense', value)),
                           ])
                         ])
                     )
               ])
-            ),
-        Endgame(past: '${widget.past},$cupper,$cmid,$clower,$qupper,$qmid,$qlower,$links,$pickup,$defense'),
-      ])
+            )
     );
   }
 }

@@ -3,29 +3,29 @@ import 'widgets.dart';
 import 'auto.dart';
 
 class PreMatch extends StatefulWidget { //teleop page
-  const PreMatch({super.key});
+  const PreMatch({super.key, required this.inputs, required this.callback});
+
+  final inputs;
+  final callback;
 
   @override
   State<PreMatch> createState () => PreMatchState();
 }
 
-class PreMatchState extends State<PreMatch> { //all the objects added to the main page here
-
-  String team = '';
-  String match = '';
-  String scouter = '';
+class PreMatchState extends State<PreMatch> { 
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-        children: [
-        Expanded( child: Center( child: ListView(
+    return Expanded( child: Center( child: ListView(
           children: [SizedBox(height: 1200, child: Column( children: [
-            TextInput(title: 'team number', callback: (value) => setState(() => team = value)),
-            TextInput(title: 'match number', callback: (value) => setState(() => match = value)),
-            TextInput(title: 'scouter', callback: (value) => setState(() => scouter = value)),
-        ]))]))),
-        Auto(past: '$team,$match,$scouter')
-    ]);
+            TextInput(title: 'team number', initial: widget.inputs['team'], callback: (value) => send('team', value)),
+            TextInput(title: 'match number', initial: widget.inputs['match'], callback: (value) => send('match', value)),
+            TextInput(title: 'scouter', initial: widget.inputs['scouter'], callback: (value) => send('scouter', value)),
+        ]))])));
+  }
+
+  void send(String tag, value) {
+    setState(() => widget.inputs[tag] = value);
+    widget.callback(widget.inputs);
   }
 }
