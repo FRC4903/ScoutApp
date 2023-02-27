@@ -36,7 +36,7 @@ class TeleopState extends State<Teleop> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Expanded(
+        home: SafeArea(
             child: ListView(children: [
       Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [

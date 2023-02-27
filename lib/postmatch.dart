@@ -29,45 +29,50 @@ class PostMatchState extends State<PostMatch> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-          child: Center(
-              child: ListView(children: [
-        SizedBox(
-            height: 1200,
-            child: Column(children: [
-              TextInput(
-                  title: 'auto comments', initial: widget.inputs['auto'], 
-                  callback: (value) => send('auto', value)),
-              TextInput(
-                  title: 'teleop comments', initial: widget.inputs['teleop'], 
-                  callback: (value) => send('teleop', value)),
-              TextInput(
-                  title: 'endgame comments', initial: widget.inputs['endgame'], 
-                  callback: (value) => send('endgame', value)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Won:',
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        decoration: TextDecoration.none),
+    return SafeArea(
+        child: Center(
+            child: ListView(children: [
+      SizedBox(
+          height: 1200,
+          child: Column(children: [
+            TextInput(
+                title: 'auto comments',
+                initial: widget.inputs['auto'],
+                callback: (value) => send('auto', value)),
+            TextInput(
+                title: 'teleop comments',
+                initial: widget.inputs['teleop'],
+                callback: (value) => send('teleop', value)),
+            TextInput(
+                title: 'endgame comments',
+                initial: widget.inputs['endgame'],
+                callback: (value) => send('endgame', value)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Won:',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      decoration: TextDecoration.none),
+                ),
+                Transform.scale(
+                  scale: 1.5,
+                  child: Checkbox(
+                    value: widget.inputs['win'],
+                    onChanged: (bool? value) {
+                      send('win', value ?? false);
+                    },
                   ),
-                  Transform.scale(
-                    scale: 1.5,
-                    child: Checkbox(
-                      value: widget.inputs['win'],
-                      onChanged: (bool? value) {
-                        send('win', value ?? false);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              Increment(
-                  title: 'RP', value: widget.inputs['RP'], callback: (value) => send('RP', value)),
-            ]))
-      ])));
+                ),
+              ],
+            ),
+            Increment(
+                title: 'RP',
+                value: widget.inputs['RP'],
+                callback: (value) => send('RP', value)),
+          ]))
+    ])));
   }
 }
