@@ -20,13 +20,47 @@ class MyScaffold extends StatefulWidget {
   const MyScaffold({super.key});
 
   @override
-  State<MyScaffold> createState () => ScaffoldState();
+  State<MyScaffold> createState() => ScaffoldState();
 }
 
 class ScaffoldState extends State<MyScaffold> {
-  
-  var inputs = {'team': '', 'match': '', 'scouter': '', 'extraCones': 0, 'extraCubes': 0, 'startPos': 0, 'moved': false, 'balanceAttempt': false, 'preCone': false, 'preCube': false, 'preScore': false, 'autoDocked': false, 'autoEngaged': false, 'cupper': 0, 'cmid': 0, 'clower': 0, 'qupper': 0, 'qmid': 0, 'qlower': 0, 'links': 0, 'pickup': 0, 'defense': 0, 'time': 0, 'attempts': 0, 'endDocked': false, 'endEngaged': false, 'auto': '', 'teleop': '', 'endgame': '', 'win': false, 'RP': 0};
-  
+  var inputs = {
+    'team': '',
+    'match': '',
+    'scouter': '',
+    'extraCones': 0,
+    'extraCubes': 0,
+    'startPos': 0,
+    'moved': false,
+    'balanceAttempt': false,
+    'preCone': false,
+    'preCube': false,
+    'preScore': false,
+    'autoDocked': false,
+    'autoEngaged': false,
+    'cupper': 0,
+    'cmid': 0,
+    'clower': 0,
+    'qupper': 0,
+    'qmid': 0,
+    'qlower': 0,
+    'links': 0,
+    'pickup': 0,
+    'defense': 0,
+    'loadStation': false,
+    'floor': false,
+    'time': 0,
+    'attempts': 0,
+    'endDocked': false,
+    'endEngaged': false,
+    'parked': false,
+    'auto': '',
+    'teleop': '',
+    'endgame': '',
+    'win': false,
+    'RP': 0
+  };
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -36,17 +70,27 @@ class ScaffoldState extends State<MyScaffold> {
               SizedBox(height: 30),
               Expanded(
                 child: Center(
-                  child: PageView(
-                    children: [
-                      PreMatch(inputs: inputs, callback: (value) => setState(() => inputs = value)),
-                      Auto(inputs: inputs, callback: (value) => setState(() => inputs = value)),
-                      Teleop(inputs: inputs, callback: (value) => setState(() => inputs = value)),
-                      Endgame(inputs: inputs, initialtime: inputs['time'], callback: (value) => setState(() => inputs = value)),
-                      PostMatch(inputs: inputs, callback: (value) => setState(() => inputs = value)),
-                      QRCode(inputs: inputs)
-                    ]),
-                  ),
-                )
+                  child: PageView(children: [
+                    PreMatch(
+                        inputs: inputs,
+                        callback: (value) => setState(() => inputs = value)),
+                    Auto(
+                        inputs: inputs,
+                        callback: (value) => setState(() => inputs = value)),
+                    Teleop(
+                        inputs: inputs,
+                        callback: (value) => setState(() => inputs = value)),
+                    Endgame(
+                        inputs: inputs,
+                        initialtime: inputs['time'],
+                        callback: (value) => setState(() => inputs = value)),
+                    PostMatch(
+                        inputs: inputs,
+                        callback: (value) => setState(() => inputs = value)),
+                    QRCode(inputs: inputs)
+                  ]),
+                ),
+              )
             ])));
   }
 }
