@@ -39,10 +39,12 @@ class PostMatchState extends State<PostMatch> {
                 title: 'auto comments',
                 initial: widget.inputs['auto'],
                 callback: (value) => send('auto', value)),
+            const SizedBox(height: 20),
             TextInput(
                 title: 'teleop comments',
                 initial: widget.inputs['teleop'],
                 callback: (value) => send('teleop', value)),
+            const SizedBox(height: 20),
             TextInput(
                 title: 'endgame comments',
                 initial: widget.inputs['endgame'],

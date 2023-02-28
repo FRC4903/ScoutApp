@@ -8,7 +8,8 @@ typedef void StringCallback(
 
 class Increment extends StatefulWidget {
   //increment values
-  const Increment({super.key, required this.title, required this.callback, this.value = 0});
+  const Increment(
+      {super.key, required this.title, required this.callback, this.value = 0});
 
   final String title;
   final IntCallback callback;
@@ -101,7 +102,11 @@ class IncrementState extends State<Increment> {
 
 class TextInput extends StatefulWidget {
   //increment objects
-  const TextInput({super.key, required this.title, required this.callback, this.initial = ''});
+  const TextInput(
+      {super.key,
+      required this.title,
+      required this.callback,
+      this.initial = ''});
 
   final String title;
   final StringCallback callback;

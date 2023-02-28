@@ -79,8 +79,7 @@ class _EndgameState extends State<Endgame> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
+    return Scaffold(
       backgroundColor: Color.fromARGB(255, 0, 12, 101),
       body: SafeArea(
         child: Padding(
@@ -284,6 +283,6 @@ class _EndgameState extends State<Endgame> {
           ),
         ),
       ),
-    ));
+    );
   }
 }
