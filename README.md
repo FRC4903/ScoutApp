@@ -7,7 +7,7 @@ Navigate to your downloads folder
 Click on the apk file
 Go through the dilog boxes and click install
 
-##Using The App
+## Using The App
 Fill out the boxes on each page
 Swipe to navigate between each page
 At the last page there should be a QR Code
