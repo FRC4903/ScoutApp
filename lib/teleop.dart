@@ -26,7 +26,6 @@ class TeleopState extends State<Teleop> {
   int qlower = 0;
   int links = 0;
   int pickup = 0;
-  int defense = 0;
   bool loadStation = false;
   bool floor = false;
   bool bumpable = false;

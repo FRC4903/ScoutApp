@@ -46,7 +46,6 @@ class ScaffoldState extends State<MyScaffold> {
     'qlower': 0,
     'links': 0,
     'pickup': 0,
-    'defense': 0,
     'loadStation': false,
     'floor': false,
     'bumpable': false,
