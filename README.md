@@ -1,16 +1,14 @@
-# flutter_application_1
-
-A new Flutter project.
+# 4903 Scout App
+The scouting app for the 4903 FRC team
 
 ## Getting Started
+Download the apk from the releases tab on github
+Navigate to your downloads folder
+Click on the apk file
+Go through the dilog boxes and click install
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+##Using The App
+Fill out the boxes on each page
+Swipe to navigate between each page
+At the last page there should be a QR Code
+Use the [QRCodeScanner](https://github.com/FRC4903/QrCodeReader) app on a laptop to scan and compile the data
