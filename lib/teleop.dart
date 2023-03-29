@@ -29,6 +29,7 @@ class TeleopState extends State<Teleop> {
   bool loadStation = false;
   bool floor = false;
   bool bumpable = false;
+  bool stationable = false;
   bool didDefending = false;
   bool wereDefended = false;
 
@@ -78,7 +79,7 @@ class TeleopState extends State<Teleop> {
                   callback: (value) => send('qlower', value)),
             ]),
             Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Icon(color: Colors.black, Icons.clear_all_rounded, size: 50),
+              Icon(color: Colors.lightBlue, Icons.clear_all_rounded, size: 50),
               Increment(
                   title: 'links',
                   value: widget.inputs['links'],
@@ -88,6 +89,71 @@ class TeleopState extends State<Teleop> {
                   title: 'picked up',
                   value: widget.inputs['pickup'],
                   callback: (value) => send('pickup', value)),
+            ]),
+            SizedBox(width: 10),
+            Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              SizedBox(height: 55),
+              Text(
+                'How tipsy is the robot?',
+                style: TextStyle(fontSize: 20),
+              ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Not tipsy:',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Transform.scale(
+                    scale: 1.5,
+                    child: Checkbox(
+                      value: widget.inputs['nottipsy'],
+                      onChanged: (bool? value) {
+                        send('nottipsy', value ?? false);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'A little tipsy:',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Transform.scale(
+                    scale: 1.5,
+                    child: Checkbox(
+                      value: widget.inputs['littletipsy'],
+                      onChanged: (bool? value) {
+                        send('littletipsy', value ?? false);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Very tipsy:',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Transform.scale(
+                    scale: 1.5,
+                    child: Checkbox(
+                      value: widget.inputs['verytipsy'],
+                      onChanged: (bool? value) {
+                        send('verytipsy', value ?? false);
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ]),
           ]),
           SizedBox(
@@ -239,10 +305,21 @@ class TeleopState extends State<Teleop> {
                       child: Checkbox(
                         value: widget.inputs['bumpable'],
                         onChanged: (bool? value) {
-                          send(
-                              'bumpable',
-                              value ??
-                                  false); //////////////////////////////////////////////////////
+                          send('bumpable', value ?? false);
+                        },
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      'Ability to go over charge station:',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Transform.scale(
+                      scale: 1.5,
+                      child: Checkbox(
+                        value: widget.inputs['stationable'],
+                        onChanged: (bool? value) {
+                          send('stationable', value ?? false);
                         },
                       ),
                     ),

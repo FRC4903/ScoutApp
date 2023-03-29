@@ -157,6 +157,15 @@ class _EndgameState extends State<Endgame> {
                               /*SizedBox(
                                   width: 80,
                                 ),*/
+                              const SizedBox(
+                                width: 40,
+                              ),
+                              Increment(
+                                title: 'Robots Docked',
+                                value: widget.inputs['robotsdocked'],
+                                callback: (value) =>
+                                    send('robotsdocked', value),
+                              ),
                             ],
                           ),
                           Row(

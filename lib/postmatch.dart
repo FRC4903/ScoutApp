@@ -35,20 +35,24 @@ class PostMatchState extends State<PostMatch> {
       SizedBox(
           height: 1200,
           child: Column(children: [
-            TextInput(
-                title: 'auto comments',
-                initial: widget.inputs['auto'],
-                callback: (value) => send('auto', value)),
-            const SizedBox(height: 20),
-            TextInput(
-                title: 'teleop comments',
-                initial: widget.inputs['teleop'],
-                callback: (value) => send('teleop', value)),
-            const SizedBox(height: 20),
-            TextInput(
-                title: 'endgame comments',
-                initial: widget.inputs['endgame'],
-                callback: (value) => send('endgame', value)),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Column(children: [
+                TextInput(
+                    title: 'auto comments',
+                    initial: widget.inputs['auto'],
+                    callback: (value) => send('auto', value)),
+                const SizedBox(height: 20),
+                TextInput(
+                    title: 'teleop comments',
+                    initial: widget.inputs['teleop'],
+                    callback: (value) => send('teleop', value)),
+                const SizedBox(height: 20),
+                TextInput(
+                    title: 'endgame comments',
+                    initial: widget.inputs['endgame'],
+                    callback: (value) => send('endgame', value)),
+              ])
+            ]),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

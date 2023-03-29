@@ -9,8 +9,9 @@ import 'code.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
-      title: '4903 Scouting App', // used by the OS task switcher
+    MaterialApp(
+      title: '4903 Scouting App',
+      theme: ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark),
       home: MyScaffold(),
     ),
   );
@@ -49,9 +50,14 @@ class ScaffoldState extends State<MyScaffold> {
     'loadStation': false,
     'floor': false,
     'bumpable': false,
+    'stationable': false,
     'didDefending': false,
     'wereDefended': false,
+    'nottipsy': false,
+    'littletipsy': false,
+    'verytipsy': false,
     'time': 0,
+    'robotsdocked': 0,
     'attempts': 0,
     'endDocked': false,
     'endEngaged': false,
