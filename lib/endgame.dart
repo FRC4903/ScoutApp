@@ -80,7 +80,6 @@ class _EndgameState extends State<Endgame> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 0, 12, 101),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -95,7 +94,7 @@ class _EndgameState extends State<Endgame> {
                     child: Text(
                       "ENDGAME",
                       style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
+                        color: Color.fromARGB(255, 0, 0, 0),
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
                       ),
@@ -104,7 +103,6 @@ class _EndgameState extends State<Endgame> {
                   Container(
                     height: 400,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(79, 255, 255, 255),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Padding(
@@ -120,8 +118,6 @@ class _EndgameState extends State<Endgame> {
                                 height: 125,
                                 width: 300,
                                 decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(144, 255, 255, 255),
                                   border: Border.all(
                                     color: Color.fromARGB(255, 0, 0, 0),
                                     style: BorderStyle.solid,
@@ -148,7 +144,7 @@ class _EndgameState extends State<Endgame> {
                                       (!started)
                                           ? Icons.play_circle_outline_rounded
                                           : Icons.stop_circle_outlined,
-                                      color: Colors.white,
+                                      color: Color.fromARGB(255, 0, 0, 0),
                                       size: 80.0,
                                     ),
                                   ),
