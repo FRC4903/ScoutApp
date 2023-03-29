@@ -94,7 +94,7 @@ class _EndgameState extends State<Endgame> {
                     child: Text(
                       "ENDGAME",
                       style: TextStyle(
-                        color: Color.fromARGB(255, 0, 0, 0),
+                        color: Color.fromARGB(255, 255, 255, 255),
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
                       ),
@@ -118,6 +118,7 @@ class _EndgameState extends State<Endgame> {
                                 height: 125,
                                 width: 300,
                                 decoration: BoxDecoration(
+                                  color: Color.fromARGB(144, 255, 255, 255),
                                   border: Border.all(
                                     color: Color.fromARGB(255, 0, 0, 0),
                                     style: BorderStyle.solid,
